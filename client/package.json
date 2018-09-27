@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "d3": "^5.7.0",
     "dygraphs": "^2.1.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
