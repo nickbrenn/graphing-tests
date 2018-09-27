@@ -40,22 +40,32 @@ class DataView extends Component {
       : null;
     apikey ? (fetchUrl += `&apikey=${apikey}`) : null;
 
-    new Dygraph(this.refs.chart, fetchUrl, {
-      legend: "always"
-    });
-    // axios
-    //   .get(fetchUrl)
-    //   .then(response => {
-    //     const keyNames = Object.keys(response.data);
-    //     const headData = response.data[keyNames[0]];
-    //     const jsonData = response.data[keyNames[1]];
-    //     const arr = Object.keys(jsonData).map(key => [key, jsonData[key]]);
-    //     this.setState({ data: arr });
-    //   })
-    //   .catch(error => {
-    //     console.log("Error:", error);
-    //     this.setState({ error: "There was an error!" });
-    //   });
+    // const dygraph = new Dygraph(this.refs.chart, fetchUrl, {
+    //   legend: "always"
+    // });
+
+    axios
+      .get(fetchUrl)
+      .then(response => {
+        // console.log(response.data);
+        // const keyNames = Object.keys(response.data);
+        // const headData = response.data[keyNames[0]];
+        // const jsonData = response.data[keyNames[1]];
+        // const arr = Object.keys(jsonData).map(key => [key, jsonData[key]]);
+        // console.log("new arr:", arr);
+        // this.setState({ data: arr });
+        const dygraph = new Dygraph(this.refs.chart, response.data, {
+          // legend: "always",
+          rollPeriod: 30,
+          showRoller: true
+        });
+
+        console.log("dygraph:", dygraph);
+      })
+      .catch(error => {
+        console.log("Error:", error);
+        this.setState({ error: "There was an error!" });
+      });
     console.log("fetchUrl = " + fetchUrl);
   };
 
