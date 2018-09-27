@@ -7,20 +7,27 @@ const baseUrl = "https://www.alphavantage.co/query?";
 
 class DataView extends Component {
   state = {
-    url: `${baseUrl}function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=${apikey}`,
-    symbol: "MSFT",
-    function: "TIME_SERIES_INTRADAY",
-    interval: "1min",
-    outputsize: "compact",
+    // symbol: "MSFT",
+    function: "FX_INTRADAY",
+    from_symbol: "EUR",
+    to_symbol: "USD",
+    interval: "5min",
+    outputsize: "full",
     datatype: "csv",
     data: null
   };
 
   fetchData = () => {
     let fetchUrl = baseUrl;
-    this.state.symbol ? (fetchUrl += `&symbol=${this.state.symbol}`) : null;
+    // this.state.symbol ? (fetchUrl += `&symbol=${this.state.symbol}`) : null;
     this.state.function
       ? (fetchUrl += `&function=${this.state.function}`)
+      : null;
+    this.state.from_symbol
+      ? (fetchUrl += `&from_symbol=${this.state.from_symbol}`)
+      : null;
+    this.state.to_symbol
+      ? (fetchUrl += `&to_symbol=${this.state.to_symbol}`)
       : null;
     this.state.interval
       ? (fetchUrl += `&interval=${this.state.interval}`)
